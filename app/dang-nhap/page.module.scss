@@ -1,0 +1,70 @@
+.section {
+  display: flex;
+  min-height: 100vh;
+  min-width: fit-content;
+  background: #efefef;
+  padding: 24px;
+
+  .container {
+    display: flex;
+    width: 800px;
+    min-width: 800px;
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 6px;
+    background: white;
+    overflow: hidden;
+
+    form {
+      width: 400px;
+      padding: 24px;
+
+      .header {
+        margin-bottom: 24px;
+      }
+
+      .body {
+        .remember_me_container {
+          margin-bottom: 16px;
+
+          .remember_me {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .footer {
+        button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+
+          img {
+            width: 16px;
+            height: 16px;
+          }
+        }
+
+        .register_link {
+          text-align: center;
+          margin-top: 8px;
+        }
+      }
+    }
+
+    .banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $color-primary-light;
+      width: 400px;
+      padding: 24px;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

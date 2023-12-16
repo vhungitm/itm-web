@@ -1,0 +1,13 @@
+.site_name_container {
+  .site_name {
+    color: $color-primary;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 100%;
+  }
+
+  .site_name_sub {
+    color: $color-default;
+    font-size: 10px;
+  }
+}

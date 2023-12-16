@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  background: #efefef;
+}
+
+* {
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+  line-height: 140%;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1680px;
+  margin: auto;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+}
+
+.ant-form-item {
+  margin-bottom: 16px;
+
+  .ant-form-item-label {
+    padding-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .ant-form-item-explain-error {
+    margin-top: 6px;
+    font-size: 12px;
+  }
+
+  .ant-form-item-margin-offset {
+    margin-bottom: 0 !important;
+  }
+}
