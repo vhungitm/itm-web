@@ -7,6 +7,7 @@ const { TextArea } = Input;
 import dayjs from 'dayjs';
 
 const Chat = () => {
+  const [loadingForm, setLoadingForm] = useState(false);
   const [form] = Form.useForm();
   const [data, setData] = useState([
     {
@@ -18,7 +19,8 @@ const Chat = () => {
     }
   ]);
 
-  const onSubmitChat = (value: any) => {
+  const onSubmitChat = async (value: any) => {
+    setLoadingForm(true);
     const newItem = {
       id: 1,
       authorAvatar: '/media/avatar/1.jpg',
@@ -27,9 +29,16 @@ const Chat = () => {
       content: value.content
     };
 
+    await new Promise(resolve => {
+      setTimeout(() => {
+        resolve(true);
+      }, 1000);
+    });
+
     const newData = [...data, newItem];
     setData(newData);
     form.resetFields();
+    setLoadingForm(false);
   };
 
   return (
@@ -58,7 +67,7 @@ const Chat = () => {
                 >
                   <TextArea placeholder="Nhập nội dung" />
                 </Form.Item>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" loading={loadingForm}>
                   Gửi
                 </Button>
               </div>
