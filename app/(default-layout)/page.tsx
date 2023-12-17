@@ -1,11 +1,7 @@
-import Fact from '@/components/common/fact';
+import Home from '@/components/home';
 
 const HomePage = () => {
-  return (
-    <>
-      <Fact />
-    </>
-  );
+  return <Home />;
 };
 
 export default HomePage;
