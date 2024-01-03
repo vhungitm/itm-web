@@ -1,12 +1,15 @@
+import MessageProvider from '@/components/common/message-provider';
 import Providers from '@/redux/providers';
 import { ConfigProvider } from 'antd';
 import { ThemeConfig } from 'antd/es/config-provider/context';
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import './layout.scss';
+import AuthProvider from '@/components/common/auth-provider';
+import Loading from './loading';
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const theme: ThemeConfig = {
@@ -25,11 +28,17 @@ const Layout = ({ children }: { children: ReactNode }) => {
         />
       </head>
       <body>
-        <ConfigProvider theme={theme}>
-          <Providers>
-            <main>{children}</main>
-          </Providers>
-        </ConfigProvider>
+        <Suspense fallback={<Loading />}>
+          <ConfigProvider theme={theme}>
+            <Providers>
+              <AuthProvider>
+                <MessageProvider>
+                  <main>{children}</main>
+                </MessageProvider>
+              </AuthProvider>
+            </Providers>
+          </ConfigProvider>
+        </Suspense>
       </body>
     </html>
   );

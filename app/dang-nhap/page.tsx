@@ -1,6 +1,10 @@
 'use client';
+
 import RequiredMark from '@/components/common/form/required-mark';
 import Logo from '@/components/common/logo';
+import { authActions } from '@/redux/auth-slice';
+import { messageActions } from '@/redux/message-slice';
+import { useAppDispatch } from '@/redux/store';
 import { Button, Checkbox, Flex, Form, Input } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -12,6 +16,7 @@ import UserIcon from './user-icon';
 import ViewPasswordIcon from './view-password-icon';
 
 const LoginPage = () => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -29,6 +34,15 @@ const LoginPage = () => {
     });
 
     if (res.succeeded) {
+      dispatch(
+        authActions.setUser({
+          id: 1,
+          fullName: 'Văn Hùng',
+          avatar: '/media/avatar/1.jpg',
+          token: 'sdfhwieuhfiuewhfuweh'
+        })
+      );
+      dispatch(messageActions.setMessage({ type: 'success', content: `Đăng nhập thành công` }));
       router.push('/');
       setLoading(false);
     }

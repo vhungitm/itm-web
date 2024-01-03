@@ -1,17 +1,22 @@
 'use client';
 
+import { authActions, selectAuth } from '@/redux/auth-slice';
+import { useAppDispatch, useAppSelector } from '@/redux/store';
+import { Dropdown, Space } from 'antd';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Logo from '../../logo';
 import styles from './header.module.scss';
 
 const Header = () => {
-  const headerMenu = [
-    { name: 'Đăng nhập', url: '/dang-nhap' },
-    { name: 'Đăng ký', url: '/dang-ky' }
-  ];
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const user: any = useAppSelector(selectAuth).user;
 
-  const pathname = usePathname();
+  const onLogout = () => {
+    dispatch(authActions.setUser(null));
+    router.push('/dang-nhap');
+  };
 
   return (
     <header id={styles.main}>
@@ -19,19 +24,28 @@ const Header = () => {
         <Link href="/">
           <Logo />
         </Link>
-        <div className={styles.menu}>
-          {headerMenu.map(menu => {
-            let className = styles.menu_item;
-            const isActive = menu.url === pathname;
-            if (isActive) className += ' ' + styles.is_active;
-
-            return (
-              <Link href={menu.url} className={className} key={menu.name}>
-                {menu.name}
-              </Link>
-            );
-          })}
-        </div>
+        {user ? (
+          <Dropdown
+            className={styles.user_container}
+            menu={{ items: [{ key: 'logout', label: 'Đăng xuất', onClick: onLogout }] }}
+          >
+            <Space>
+              <div className={styles.user_avatar}>
+                <img src={user.avatar} />
+              </div>
+              <div className={styles.user_name}>{user.fullName}</div>
+            </Space>
+          </Dropdown>
+        ) : (
+          <div className={styles.auth_link}>
+            <Link href={'/dang-nhap'} className={styles.auth_link_item}>
+              Đăng nhập
+            </Link>
+            <Link href={'/dang-ky'} className={styles.auth_link_item}>
+              Đăng ký
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   );

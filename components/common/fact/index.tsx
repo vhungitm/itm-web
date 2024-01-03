@@ -3,8 +3,11 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './index.module.scss';
+import { useAppSelector } from '@/redux/store';
+import { selectAuth } from '@/redux/auth-slice';
 
 const Fact = () => {
+  const user = useAppSelector(selectAuth).user;
   const [data] = useState([
     {
       id: 1,
@@ -64,7 +67,10 @@ const Fact = () => {
         </div>
         <div className={styles.body}>
           <Swiper className={styles.items} spaceBetween={12} slidesPerView="auto" pagination={{ clickable: true }}>
-            <SwiperSlide className={styles.create_new_item}>
+            <SwiperSlide
+              className={styles.create_new_item}
+              style={user && { background: `url(${user.avatar}) no-repeat`, backgroundSize: 'cover' }}
+            >
               <div className={styles.icon}>
                 <svg viewBox="0 0 20 20" width="20" height="20">
                   <path d="M0 10H20 10M10 0V10 20" strokeWidth={2} stroke="white" />

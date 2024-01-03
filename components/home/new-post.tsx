@@ -46,7 +46,7 @@ const NewPost = () => {
       authorName: 'Sharingan Shop'
     },
     {
-      id: 4,
+      id: 5,
       title: 'Review hệ thống đèn Philips trong phòng làm việc của mình',
       thumbnail:
         'https://imgproxy7.tinhte.vn/8LfKEBXeILcr43QvxwQOUvJTrETdksuf7tiZqbtWlJo/h:460/plain/https://photo2.tinhte.vn/data/attachment-files/2023/12/8216698_philips-hue-tinhte-didu-01.jpg',

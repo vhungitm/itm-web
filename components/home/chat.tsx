@@ -1,32 +1,35 @@
 'use client';
+import { selectAuth } from '@/redux/auth-slice';
+import { useAppSelector } from '@/redux/store';
 import { Button, Form, Input } from 'antd';
+import dayjs from 'dayjs';
 import { useState } from 'react';
 import RequiredMark from '../common/form/required-mark';
 import styles from './chat.module.scss';
 const { TextArea } = Input;
-import dayjs from 'dayjs';
+
+export interface IChat {
+  authorAvatar: string;
+  authorName: string;
+  createdDate: string;
+  message: string;
+}
 
 const Chat = () => {
+  const user = useAppSelector(selectAuth).user;
   const [loadingForm, setLoadingForm] = useState(false);
   const [form] = Form.useForm();
-  const [data, setData] = useState([
-    {
-      id: 1,
-      authorAvatar: '/media/avatar/1.jpg',
-      authorName: 'Văn Hùng',
-      createdDate: '17/12/2023 17:24',
-      content: `Chào mọi người`
-    }
-  ]);
+  const [data, setData] = useState<IChat[]>([]);
 
   const onSubmitChat = async (value: any) => {
+    let { message } = value;
+
     setLoadingForm(true);
-    const newItem = {
-      id: 1,
+    const newItem: IChat = {
       authorAvatar: '/media/avatar/1.jpg',
       authorName: 'Văn Hùng',
       createdDate: dayjs().format('DD/MM/YYYY HH:mm:ss'),
-      content: value.content
+      message: message
     };
 
     await new Promise(resolve => {
@@ -35,10 +38,45 @@ const Chat = () => {
       }, 1000);
     });
 
-    const newData = [...data, newItem];
-    setData(newData);
+    let newData = [newItem, ...data];
+
     form.resetFields();
+    setData(newData);
     setLoadingForm(false);
+
+    message = message.toLowerCase();
+    if (message.includes('hương')) {
+      let flagAutoChat = false;
+      let botMessage = '';
+
+      if (message.includes('chào')) {
+        botMessage = 'Dạ em chào anh <b>@Văn Hùng</b>';
+        flagAutoChat = true;
+      }
+      if (message.includes('yêu')) {
+        botMessage = 'Em cũng yêu anh <b>@Văn Hùng</b> nhiều lắm 😍 Hí hí';
+        flagAutoChat = true;
+      } else if (message.includes('nhớ')) {
+        botMessage =
+          'Chẳng phải là Xuân Diệu em cũng biết làm thơ. Vì giờ trong đầu em toàn là thương với nhớ 💕 Nhớ anh <b>@Văn Hùng</b>';
+        flagAutoChat = true;
+      }
+
+      if (flagAutoChat)
+        setTimeout(() => {
+          newData = [
+            {
+              authorName: 'Lan Hương',
+              authorAvatar: 'https://bookkol.com/wp-content/uploads/2022/12/lan-huong-1.jpg',
+              createdDate: dayjs().format('DD/MM/YYYY HH:mm:ss'),
+              message: botMessage
+            },
+            ...newData
+          ];
+
+          setData(newData);
+        }, 1000);
+    }
   };
 
   return (
@@ -48,36 +86,39 @@ const Chat = () => {
           <h2>Phòng Chat</h2>
         </div>
         <div className={styles.body}>
-          <Form
-            form={form}
-            onFinish={onSubmitChat}
-            className={styles.form}
-            layout="vertical"
-            requiredMark={RequiredMark}
-          >
-            <div className={styles.form_item_content}>
-              <div className={styles.form_avatar}>
-                <img src="/media/avatar/1.jpg" />
+          {user && (
+            <Form
+              form={form}
+              onFinish={onSubmitChat}
+              className={styles.form}
+              layout="vertical"
+              requiredMark={RequiredMark}
+            >
+              <div className={styles.form_item_content}>
+                <div className={styles.form_avatar}>
+                  <img src="/media/avatar/1.jpg" />
+                </div>
+                <div className={styles.form_item_end}>
+                  <Form.Item
+                    name="message"
+                    className={styles.form_item}
+                    rules={[{ required: true, message: 'Vui lòng nhập nội dung chat' }]}
+                  >
+                    <TextArea placeholder="Nhập nội dung" />
+                  </Form.Item>
+
+                  <Button type="primary" htmlType="submit" loading={loadingForm}>
+                    Gửi
+                  </Button>
+                </div>
               </div>
-              <div className={styles.form_item_end}>
-                <Form.Item
-                  name="content"
-                  className={styles.form_item}
-                  rules={[{ required: true, message: 'Vui lòng nhập nội dung chat' }]}
-                >
-                  <TextArea placeholder="Nhập nội dung" />
-                </Form.Item>
-                <Button type="primary" htmlType="submit" loading={loadingForm}>
-                  Gửi
-                </Button>
-              </div>
-            </div>
-          </Form>
+            </Form>
+          )}
 
           {/* Chat items */}
           <div className={styles.items}>
-            {data.map(item => (
-              <div className={styles.item} key={item.id}>
+            {data.map((item, index) => (
+              <div className={styles.item} key={index}>
                 <div className={styles.item_header}>
                   <div className={styles.item_avatar}>
                     <img src={item.authorAvatar} />
@@ -87,7 +128,7 @@ const Chat = () => {
                     <div className={styles.item_created_date}>{item.createdDate}</div>
                   </div>
                 </div>
-                <div className={styles.item_body} dangerouslySetInnerHTML={{ __html: item.content }}></div>
+                <div className={styles.item_body} dangerouslySetInnerHTML={{ __html: item.message }}></div>
               </div>
             ))}
           </div>

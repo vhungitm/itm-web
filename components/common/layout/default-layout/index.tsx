@@ -4,11 +4,11 @@ import Header from './header';
 
 const DefaultLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <>
+    <div>
       <Header />
-      {children}
+      <main style={{ padding: '70px 0 24px 0' }}>{children}</main>
       <Footer />
-    </>
+    </div>
   );
 };
 
