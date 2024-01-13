@@ -6,6 +6,11 @@
     border-radius: 6px;
     padding: 24px;
 
+    .title {
+      font-size: 16px;
+      margin: 0 0 16px 0;
+    }
+
     .items {
       display: flex;
       flex-direction: column;

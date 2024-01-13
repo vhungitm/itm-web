@@ -1,7 +1,7 @@
 import PostDetail from '@/components/post/detail';
 
-const DetailPage = () => {
-  return <PostDetail />;
+const DetailPage = (props: any) => {
+  return <PostDetail {...props} />;
 };
 
 export default DetailPage;
