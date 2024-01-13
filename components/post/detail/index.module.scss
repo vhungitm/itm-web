@@ -1,0 +1,54 @@
+.section {
+  padding: 24px;
+
+  .container {
+    background: white;
+    border-radius: 4px;
+    padding: 24px;
+
+    display: flex;
+    gap: 16px;
+
+    .container_start {
+      .header {
+        .title {
+          margin: 0px 0px 16px 0px;
+          font-size: 26px;
+        }
+
+        .detail {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+
+          .author_avatar img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid $color-primary;
+          }
+
+          .detail_end {
+            .author_name {
+              font-weight: bold;
+              color: $color-primary;
+            }
+
+            .created_date {
+              font-size: 10px;
+            }
+          }
+        }
+      }
+
+      .content {
+        margin-top: 16px;
+      }
+    }
+
+    .container_end {
+      min-width: 400px;
+      width: 400px;
+    }
+  }
+}

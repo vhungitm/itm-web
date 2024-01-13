@@ -1,12 +1,13 @@
 'use client';
-import { useState } from 'react';
+import Link from 'next/link';
 import styles from './new-post.module.scss';
 
 const NewPost = () => {
-  const [data, setData] = useState([
+  const data = [
     {
       id: 1,
       title: 'Cristiano Ronaldo góp vốn phát triển game bóng đá miễn phí UFL',
+      pathname: 'cris',
       thumbnail:
         'https://imgproxy7.tinhte.vn/vT7kluaMgjyhUhegCZxOqbANTSbspJ1K3h9kHjii9bM/h:460/plain/https://photo2.tinhte.vn/data/attachment-files/2023/12/8213064_GettyImages-1632006227.webp',
       createdDate: '01/01/2023 10:00',
@@ -17,6 +18,7 @@ const NewPost = () => {
     {
       id: 2,
       title: 'Hyundai Venue ra mắt tại Việt Nam: SUV đô thị 5 chỗ, giá từ 539 triệu Đồng',
+      pathname: 'hyndai',
       thumbnail:
         'https://imgproxy7.tinhte.vn/wE4qnPbiL-rGwmSdswsmJijXgBikiZXZ0QAJjmDCWBY/h:460/plain/https://photo2.tinhte.vn/data/attachment-files/2023/12/8217166_hyundai-venue-ra-mat-tinhte.jpg',
       createdDate: '17/12/2023 14:20',
@@ -27,6 +29,7 @@ const NewPost = () => {
     {
       id: 3,
       title: 'GTA V tròn 10 tuổi: "Nghệ thuật vị nhân sinh", hay mọi lối mòn của điện ảnh Mỹ ghép lại làm một?',
+      pathname: 'gta',
       thumbnail:
         'https://imgproxy7.tinhte.vn/yhOYCcz1NUyovmq_J8zfF5CX9T_-9a3jVuW70QIeuWY/h:460/plain/https://photo2.tinhte.vn/data/attachment-files/2023/12/8217121_3-gtavpc-03272015.jpg',
       createdDate: '17/12/2023 14:20',
@@ -38,6 +41,7 @@ const NewPost = () => {
     {
       id: 4,
       title: '5 mẫu “AI Laptop” nổi bật trang bị chip Intel Core Ultra vừa mới ra mắt',
+      pathname: '5-mau-ai',
       thumbnail:
         'https://imgproxy7.tinhte.vn/UKuKzl_HzvnvW1nJxLUF3WuZTBZrUaUAwWpUtNzBIR4/h:460/plain/https://photo2.tinhte.vn/data/attachment-files/2023/12/8217018_cover-AI-Laptop-Intel-Meteor-Lake-tinhte.jpg',
       createdDate: '17/12/2023 14:20',
@@ -48,6 +52,7 @@ const NewPost = () => {
     {
       id: 5,
       title: 'Review hệ thống đèn Philips trong phòng làm việc của mình',
+      pathname: 'review',
       thumbnail:
         'https://imgproxy7.tinhte.vn/8LfKEBXeILcr43QvxwQOUvJTrETdksuf7tiZqbtWlJo/h:460/plain/https://photo2.tinhte.vn/data/attachment-files/2023/12/8216698_philips-hue-tinhte-didu-01.jpg',
       createdDate: '17/12/2023 14:20',
@@ -55,15 +60,17 @@ const NewPost = () => {
       authorAvatar: 'https://photo2.tinhte.vn/data/avatars/m/2462/2462268.jpg?1514212950',
       authorName: 'Reviewer'
     }
-  ]);
+  ];
 
   return (
     <section className={styles.section}>
       <div className={styles.container + ' container'}>
         <div className={styles.items}>
           {data.map(item => (
-            <div className={styles.item} key={item.id}>
-              <img className={styles.item_thumbnail} src={item.thumbnail} alt={item.title} />
+            <Link href={'/bai-viet/' + item.pathname} className={styles.item} key={item.id}>
+              <div className={styles.item_thumbnail}>
+                <img src={item.thumbnail} alt={item.title} />
+              </div>
               <div className={styles.item_content}>
                 <div className={styles.item_title}>{item.title}</div>
                 <div className={styles.item_time}>{item.createdDate}</div>
@@ -75,7 +82,7 @@ const NewPost = () => {
                   <div className={styles.item_author_name}>{item.authorName}</div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
