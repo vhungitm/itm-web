@@ -46,6 +46,28 @@
       .content {
         margin-top: 16px;
       }
+
+      .actions {
+        margin-top: 16px;
+        border: 1px solid $color-gray-light;
+        border-width: 1px 0 1px 0;
+        padding: 8px 0;
+        display: flex;
+
+        .action {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: get-item-width(3, 0px);
+          padding: 10px;
+          border-radius: 4px;
+          cursor: pointer;
+
+          &:hover {
+            background: $color-gray-light;
+          }
+        }
+      }
     }
 
     .container_end {

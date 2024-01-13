@@ -1,0 +1,4 @@
+/* Get item with by col number and gap */
+@function get-item-width($cols, $gap) {
+  @return calc(100% / $cols - ($gap * ($cols - 1) / $cols));
+}

@@ -37,7 +37,15 @@ const PostDetail = (props: any) => {
               </div>
             </div>
 
+            {/* Content */}
             <div className={styles.content} dangerouslySetInnerHTML={{ __html: data.content }}></div>
+
+            {/* Actions */}
+            <div className={styles.actions}>
+              <div className={styles.action + ' ' + styles.action_like}>Thích</div>
+              <div className={styles.action + ' ' + styles.action_comment}>Bình luận</div>
+              <div className={styles.action + ' ' + styles.action_share}>Chia sẽ </div>
+            </div>
           </div>
           <div className={styles.container_end}>
             <NewPost />
