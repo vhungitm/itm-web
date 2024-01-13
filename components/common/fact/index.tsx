@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './index.module.scss';
 import { useAppSelector } from '@/redux/store';
 import { selectAuth } from '@/redux/auth-slice';
+import Avatar from '../avatar';
 
 const Fact = () => {
   const user = useAppSelector(selectAuth).user;
@@ -69,7 +70,7 @@ const Fact = () => {
           <Swiper className={styles.items} spaceBetween={12} slidesPerView="auto" pagination={{ clickable: true }}>
             <SwiperSlide
               className={styles.create_new_item}
-              style={user && { background: `url(${user.avatar}) no-repeat`, backgroundSize: 'cover' }}
+              style={user ? { background: `url(${user.avatar}) no-repeat`, backgroundSize: 'cover' } : {}}
             >
               <div className={styles.icon}>
                 <svg viewBox="0 0 20 20" width="20" height="20">
@@ -81,7 +82,7 @@ const Fact = () => {
             {data.map(item => (
               <SwiperSlide className={styles.item} key={item.id}>
                 <img src={item.thumbnail} className={styles.thumbnail} />
-                <img src={item.avatar} className={styles.avatar}></img>
+                <Avatar src={item.avatar} className={styles.avatar} />
                 <div className={styles.full_name}>{item.fullName}</div>
               </SwiperSlide>
             ))}

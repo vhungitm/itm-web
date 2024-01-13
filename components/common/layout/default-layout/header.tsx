@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Logo from '../../logo';
 import styles from './header.module.scss';
+import Avatar from '../../avatar';
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -30,9 +31,7 @@ const Header = () => {
             menu={{ items: [{ key: 'logout', label: 'Đăng xuất', onClick: onLogout }] }}
           >
             <Space>
-              <div className={styles.user_avatar}>
-                <img src={user.avatar} />
-              </div>
+              <Avatar src={user?.avatar} />
               <div className={styles.user_name}>{user.fullName}</div>
             </Space>
           </Dropdown>

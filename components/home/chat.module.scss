@@ -19,16 +19,6 @@
           display: flex;
           gap: 8px;
 
-          .form_avatar {
-            img {
-              width: 32px;
-              height: 32px;
-              border-radius: 50%;
-              border: 1px solid $color-primary;
-              object-fit: cover;
-            }
-          }
-
           .form_item_end {
             flex: 1;
 
@@ -58,21 +48,7 @@
             align-items: center;
             gap: 8px;
 
-            .item_avatar {
-              img {
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                border: 1px solid $color-primary;
-                object-fit: cover;
-              }
-            }
-
             .item_end {
-              display: flex;
-              align-items: center;
-              gap: 8px;
-
               .item_full_name {
                 font-weight: 600;
               }

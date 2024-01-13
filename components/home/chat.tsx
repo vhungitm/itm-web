@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import RequiredMark from '../common/form/required-mark';
 import styles from './chat.module.scss';
+import Avatar from '../common/avatar';
 const { TextArea } = Input;
 
 export interface IChat {
@@ -95,9 +96,7 @@ const Chat = () => {
               requiredMark={RequiredMark}
             >
               <div className={styles.form_item_content}>
-                <div className={styles.form_avatar}>
-                  <img src="/media/avatar/1.jpg" />
-                </div>
+                <Avatar src={user.avatar} />
                 <div className={styles.form_item_end}>
                   <Form.Item
                     name="message"
@@ -121,7 +120,7 @@ const Chat = () => {
               <div className={styles.item} key={index}>
                 <div className={styles.item_header}>
                   <div className={styles.item_avatar}>
-                    <img src={item.authorAvatar} />
+                    <Avatar src={item.authorAvatar} />
                   </div>
                   <div className={styles.item_end}>
                     <div className={styles.item_full_name}>{item.authorName}</div>

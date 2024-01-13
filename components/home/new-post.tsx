@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import styles from './new-post.module.scss';
+import Avatar from '../common/avatar';
 
 const NewPost = () => {
   const data = [
@@ -76,9 +77,7 @@ const NewPost = () => {
                 <div className={styles.item_time}>{item.createdDate}</div>
                 <div className={styles.item_desc}>{item.description}</div>
                 <div className={styles.item_author}>
-                  <div className={styles.item_author_avatar}>
-                    <img src={item.authorAvatar} />
-                  </div>
+                  <Avatar src={item.authorAvatar} />
                   <div className={styles.item_author_name}>{item.authorName}</div>
                 </div>
               </div>

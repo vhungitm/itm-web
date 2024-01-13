@@ -2,6 +2,7 @@ import { Breadcrumb } from 'antd';
 import { BreadcrumbItemType } from 'antd/es/breadcrumb/Breadcrumb';
 import styles from './index.module.scss';
 import NewPost from './new-post';
+import Avatar from '@/components/common/avatar';
 
 const PostDetail = () => {
   const breadcrumb: BreadcrumbItemType[] = [
@@ -31,9 +32,7 @@ const PostDetail = () => {
           <div className={styles.header}>
             <h1 className={styles.title}>{data.title}</h1>
             <div className={styles.detail}>
-              <div className={styles.author_avatar}>
-                <img src={data.authorAvatar} />
-              </div>
+              <Avatar src={data.authorAvatar} />
               <div className={styles.detail_end}>
                 <div className={styles.author_name}>{data.authorName}</div>
                 <div className={styles.created_date}>{data.createdDate}</div>

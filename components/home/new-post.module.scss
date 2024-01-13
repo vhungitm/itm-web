@@ -61,16 +61,6 @@
             align-items: center;
             gap: 8px;
 
-            .item_author_avatar {
-              img {
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                border: 1px solid $color-primary;
-                object-fit: cover;
-              }
-            }
-
             .item_author_name {
               font-weight: 600;
               color: $color-default;

@@ -2,9 +2,22 @@ import { createSlice } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 import { RootState } from './store';
 
-const initialState = {
+export interface IUser {
+  username: string;
+  fullName: string;
+  email: string;
+  avatar: string;
+  gender: 'Nam' | 'Nữ';
+}
+
+export interface IAuthState {
+  user: IUser | null;
+  loading: boolean;
+}
+
+const initialState: IAuthState = {
   user: null,
-  isLoading: true
+  loading: true
 };
 
 const authSlice = createSlice({
